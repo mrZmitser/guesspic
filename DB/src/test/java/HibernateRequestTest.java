@@ -2,10 +2,12 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.sql.SQLException;
+import java.util.Optional;
 
 class HibernateRequestTest {
     @Test
     public void requestTest(){
+        Dao<Word> WordDao = new WordDao();
         List<Word> words = null;
         try {
             words = HibernateRequest.getAllTable();
@@ -13,6 +15,8 @@ class HibernateRequestTest {
             e.printStackTrace();
         }
         for(var w: words)
-        System.out.println(w.getWord());
+            WordDao.save(w);
+        for(var w: WordDao.getAll())
+            System.out.println(w.getWord());
     }
 }
