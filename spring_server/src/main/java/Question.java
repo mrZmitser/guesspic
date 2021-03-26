@@ -1,5 +1,3 @@
-package spring_server;
-
 import lombok.Data;
 
 @Data

@@ -6,16 +6,17 @@ import java.sql.SQLException;
 class HibernateRequestTest {
     @Test
     public void requestTest() {
-        Dao<Word> WordDao = new WordDao();
-        List<Word> words = null;
+        Dao<Word> wordDao = new WordDao();
+        List<Word> words;
         try {
             words = HibernateRequest.getAllTable();
         } catch (SQLException e) {
             e.printStackTrace();
+            return;
         }
         for (var w : words)
-            WordDao.save(w);
-        for (var w : WordDao.getAll())
+            wordDao.save(w);
+        for (var w : wordDao.getAll())
             System.out.println(w.getWord());
     }
 }
