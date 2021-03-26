@@ -1,3 +1,7 @@
+import database.Dao;
+import database.HibernateRequest;
+import database.Word;
+import database.WordDao;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

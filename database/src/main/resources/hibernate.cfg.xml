@@ -11,7 +11,7 @@
         <property name="hibernate.connection.password">password</property>
         <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/postgres</property>
 
-        <mapping class="Word"/>
+        <mapping class="database.Word"/>
 
     </session-factory>
 </hibernate-configuration>
