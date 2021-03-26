@@ -6,10 +6,6 @@ public class WordDao implements Dao<Word> {
 
     private ArrayList<Word> words = new ArrayList<>();
 
-    public WordDao() {
-
-    }
-
     @Override
     public Optional<Word> get(long id) {
         return Optional.ofNullable(words.get((int) id));
