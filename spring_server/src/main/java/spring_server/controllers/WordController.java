@@ -1,22 +1,22 @@
-package spring_server;
+package spring_server.controllers;
 
 import database.Word;
-import database.WordDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Random;
 
 @RestController
-@Controller
 public class WordController {
     @Autowired
-    private WordDao wordDao;
+    private ApplicationContext appContext;
 
     @GetMapping("/word")
-    public Word word() {
-        return wordDao.getRandWord().orElse(new Word("Error"));
+    public Word word() throws SQLException {
+        return appContext.getBean(Word.class);
     }
 }
