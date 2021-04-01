@@ -30,13 +30,13 @@ public class WebSocketChatEventListener {
     public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
         StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
 
-        String username = (String) headerAccessor.getSessionAttributes().get("username");
+        /*String username = (String) headerAccessor.getSessionAttributes().get("username");
 
         ChatMessage chatMessage = ChatMessage.builder().
                 type(MessageType.DISCONNECT).
                 sender(username).
-                build();
+                build();*/
 
-        messagingTemplate.convertAndSend("/topic/public", chatMessage);
+        //messagingTemplate.convertAndSend("/topic/public", chatMessage);
     }
 }
