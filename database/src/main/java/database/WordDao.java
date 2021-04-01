@@ -1,4 +1,4 @@
-package src.main.java.database;
+package database;
 
 import java.util.ArrayList;
 import java.util.Objects;
