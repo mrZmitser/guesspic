@@ -1,4 +1,4 @@
-package database;
+package src.main.java.database;
 
 import lombok.Getter;
 import lombok.Setter;

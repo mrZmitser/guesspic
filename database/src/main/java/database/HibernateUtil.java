@@ -1,4 +1,4 @@
-package database;
+package src.main.java.database;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
