@@ -24,4 +24,18 @@ public class HibernateRequest {
         HibernateUtil.shutdown();
         return words;
     }
+
+    public static List<Word> getById() throws SQLException {
+        List<Word> words = new ArrayList<>();
+
+        try {
+            Query<Word> query = session.createQuery("from database.Word ORDER BY RAND()", Word.class).setMaxResults(1);
+            words = query.list();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        HibernateUtil.shutdown();
+        return words;
+    }
 }
