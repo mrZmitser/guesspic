@@ -1,14 +1,11 @@
 package database;
 
-import org.springframework.stereotype.Repository;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
-@Repository
 public class WordDao implements Dao<Word> {
 
     private List<Word> words = new ArrayList<>();
@@ -34,7 +31,7 @@ public class WordDao implements Dao<Word> {
         words.add(word);
     }
 
-    public static Optional<WordDao> bindWithDatabase() {
+    public static Optional<WordDao> bindWithDatabase(){
         WordDao wordDao = new WordDao();
         try {
             wordDao.createList(HibernateRequest.getAllTable());
@@ -49,8 +46,8 @@ public class WordDao implements Dao<Word> {
         words.remove(word);
     }
 
-    public Optional<Word> getRandWord() {
-        Word word;
+    public Optional<Word> getRandomWord(){
+        Word word = null;
         try {
             word = HibernateRequest.getById().get(0);
         } catch (SQLException e) {
