@@ -34,7 +34,7 @@ public class WebSocketChatEventListener {
 
         ChatMessage chatMessage = ChatMessage.builder().
                 type(MessageType.DISCONNECT).
-                sender(userId).
+                senderId(userId).
                 build();
 
         messagingTemplate.convertAndSend("/topic/public", chatMessage);
