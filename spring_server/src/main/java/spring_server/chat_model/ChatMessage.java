@@ -16,7 +16,7 @@ public class ChatMessage {
 
     @Getter
     @Setter
-    private User sender;
+    private int senderId;
 
     @Getter
     @Setter
