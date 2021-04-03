@@ -6,7 +6,7 @@ public class User {
     @Getter
     private final String name;
     @Getter
-    private int id;
+    private final int id;
     private static int userCounter = 1;
     @Getter
     private int score = 0;
