@@ -9,11 +9,12 @@ import java.util.List;
 
 public class HibernateRequest {
 
+    private static final Session session = HibernateUtil.getSessionFactory().openSession();
+
     public static List<Word> getAllTable() throws SQLException {
         List<Word> words = new ArrayList<>();
 
         try {
-            var session = HibernateUtil.getSessionFactory().openSession();
             Query<Word> query = session.createQuery("from database.Word group by id", Word.class);
             words = query.list();
         } catch (Exception e) {
@@ -28,7 +29,6 @@ public class HibernateRequest {
         List<Word> words = new ArrayList<>();
 
         try {
-            var session = HibernateUtil.getSessionFactory().openSession();
             Query<Word> query = session.createQuery("from database.Word ORDER BY RAND()", Word.class).setMaxResults(1);
             words = query.list();
         } catch (Exception e) {
