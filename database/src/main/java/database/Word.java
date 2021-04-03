@@ -3,6 +3,7 @@ package database;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.management.ConstructorParameters;
 import javax.persistence.*;
 
 

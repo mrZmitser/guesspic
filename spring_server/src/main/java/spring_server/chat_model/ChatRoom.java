@@ -18,22 +18,20 @@ public class ChatRoom {
     private static int idCounter = 1;
 
 
-    public ChatRoom(String nameChatRoom)
-    {
+    public ChatRoom(String nameChatRoom) {
         this.nameChatRoom = nameChatRoom;
         this.idChatRoom = idCounter++;
     }
 
-    public void addChats(ChatMessage chat)
-    {
+    public void addChats(ChatMessage chat) {
         this.chats.add(chat);
     }
-    public void addUsers(User user)
-    {
+
+    public void addUsers(User user) {
         this.users.add(user);
     }
-    public void removeUsers(User user)
-    {
+
+    public void removeUsers(User user) {
         this.users.remove(user);
     }
 }
