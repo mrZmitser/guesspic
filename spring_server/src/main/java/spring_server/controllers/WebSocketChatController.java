@@ -26,7 +26,7 @@ public class WebSocketChatController {
     @SendTo("/topic/public")
     public ChatMessage newUser(@Payload ChatMessage chatMessage, SimpMessageHeaderAccessor headerAccessor) {
         messages.add(chatMessage);
-        headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
+        headerAccessor.getSessionAttributes().put("username", chatMessage.getSenderId());
         return chatMessage;
     }
 
