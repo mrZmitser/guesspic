@@ -5,27 +5,22 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
-import spring_server.chat_model.ChatMessage;
-
-import java.util.ArrayList;
+import spring_server.chat_model.GameChatMessage;
 
 @Controller
 public class WebSocketChatController {
 
-    private static ArrayList<ChatMessage> messages = new ArrayList<>();
-
     @MessageMapping("/chat.send")
     @SendTo("/topic/public")
-    public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
-        messages.add(chatMessage);
-
+    public GameChatMessage sendMessage(@Payload GameChatMessage chatMessage) {
+        chatMessage.getChatRoom().addMessage(chatMessage);
         return chatMessage;
     }
 
     @MessageMapping("/chat.newUser")
     @SendTo("/topic/public")
-    public ChatMessage newUser(@Payload ChatMessage chatMessage, SimpMessageHeaderAccessor headerAccessor) {
-        messages.add(chatMessage);
+    public GameChatMessage newUser(@Payload GameChatMessage chatMessage, SimpMessageHeaderAccessor headerAccessor) {
+        chatMessage.getChatRoom().addMessage(chatMessage);
         headerAccessor.getSessionAttributes().put("username", chatMessage.getSenderId());
         return chatMessage;
     }

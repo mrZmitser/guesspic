@@ -9,7 +9,7 @@ import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.messaging.SessionConnectedEvent;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
-import spring_server.chat_model.ChatMessage;
+import spring_server.chat_model.GameChatMessage;
 import spring_server.chat_model.MessageType;
 
 
@@ -32,7 +32,7 @@ public class WebSocketChatEventListener {
 
         int userId = (int) headerAccessor.getSessionAttributes().get("username");
 
-        ChatMessage chatMessage = ChatMessage.builder().
+        GameChatMessage chatMessage = GameChatMessage.builder().
                 type(MessageType.DISCONNECT).
                 senderId(userId).
                 build();

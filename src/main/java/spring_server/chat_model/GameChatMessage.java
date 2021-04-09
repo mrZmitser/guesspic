@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Builder
-public class ChatMessage {
+public class GameChatMessage {
     @Getter
     @Setter
     private MessageType type;
@@ -21,4 +21,8 @@ public class ChatMessage {
     @Getter
     @Setter
     private String time;
+
+    @Getter
+    @Setter
+    private GameChatRoom chatRoom;
 }

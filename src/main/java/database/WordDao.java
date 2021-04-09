@@ -50,7 +50,7 @@ public class WordDao implements Dao<Word> {
         words.remove(word);
     }
 
-    public Optional<Word> getRandWord() {
+    public static Optional<Word> getRandWord() {
         Word word;
         try {
             word = HibernateRequest.getById().get(0);
