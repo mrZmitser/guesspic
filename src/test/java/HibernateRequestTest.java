@@ -4,8 +4,8 @@ import database.Word;
 import database.WordDao;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
 import java.sql.SQLException;
+import java.util.List;
 
 class HibernateRequestTest {
     @Test
