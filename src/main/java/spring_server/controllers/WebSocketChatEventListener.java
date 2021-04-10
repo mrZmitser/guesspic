@@ -9,12 +9,16 @@ import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.messaging.SessionConnectedEvent;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
+import spring_server.chat_model.GameChatController;
 import spring_server.chat_model.GameChatMessage;
 import spring_server.chat_model.MessageType;
 
 
 @Component
 public class WebSocketChatEventListener {
+
+    @Autowired
+    GameChatController gameChatController;
 
     private static final Logger logger = LoggerFactory.getLogger(WebSocketChatEventListener.class);
 

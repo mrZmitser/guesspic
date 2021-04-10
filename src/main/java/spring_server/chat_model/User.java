@@ -10,14 +10,14 @@ public class User {
     private static int userCounter = 1;
     @Getter
     private int score = 0;
-    private final int supplement = 5;
+    private final int bonus = 5;
 
     public User(String name) {
         this.name = name;
         this.id = userCounter++;
     }
-    public void addScore()
-    {
-        this.score += supplement;
+
+    public void addScore() {
+        this.score += bonus;
     }
 }

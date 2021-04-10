@@ -24,5 +24,5 @@ public class GameChatMessage {
 
     @Getter
     @Setter
-    private GameChatRoom chatRoom;
+    private int chatRoomId;
 }
