@@ -1,20 +1,26 @@
 package spring_server.chat_model;
 
 import lombok.Getter;
+import org.springframework.stereotype.Component;
 
-import java.util.HashSet;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
+@Component
 public class GameChatController {
     @Getter
-    private final HashSet<GameChatRoom> chats = new HashSet<>();
+    private static final Map<Integer, GameChatRoom> chats = new ConcurrentHashMap<>();
 
-    public void add(GameChatRoom chatRoom)
-    {
-        this.chats.add(chatRoom);
+    public static void add(GameChatRoom chatRoom) {
+        chats.put(chatRoom.getId(), chatRoom);
     }
 
-    public void remove(GameChatRoom chatRoom)
-    {
-        this.chats.remove(chatRoom);
+    public static void remove(int chatRoomId) {
+        chats.remove(chatRoomId);
     }
+
+    public static GameChatRoom getRoom(int id) {
+        return chats.get(id);
+    }
+
 }

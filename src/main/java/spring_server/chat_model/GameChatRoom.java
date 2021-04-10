@@ -8,24 +8,25 @@ import java.util.*;
 
 public class GameChatRoom {
     @Getter
-    private final Queue<GameChatMessage> chat = new LinkedList<>();
+    private final Queue<GameChatMessage> messages = new LinkedList<>();
     @Getter
     private final Map<Integer, User> users = new HashMap<>();
     @Getter
-    private final String nameChatRoom;
+    private final String name;
     @Getter
-    private final int chatRoomId;
+    private final int id;
+
     private static int idCounter = 1;
 
     private Optional<Word> currWord = Optional.empty();
 
     public GameChatRoom(String chatRoomName) {
-        this.nameChatRoom = chatRoomName;
-        this.chatRoomId = idCounter++;
+        this.name = chatRoomName;
+        this.id = idCounter++;
     }
 
     public void addMessage(GameChatMessage message) {
-        chat.add(message);
+        messages.add(message);
 
         if (currWord.isPresent() && message.getContent().equals(currWord.get().getWord())) {
             users.get(message.getSenderId()).addScore();
