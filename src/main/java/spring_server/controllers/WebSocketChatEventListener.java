@@ -20,10 +20,10 @@ public class WebSocketChatEventListener {
     @Autowired
     GameChatController gameChatController;
 
-    private static final Logger logger = LoggerFactory.getLogger(WebSocketChatEventListener.class);
-
     @Autowired
     private SimpMessageSendingOperations messagingTemplate;
+
+    private static final Logger logger = LoggerFactory.getLogger(WebSocketChatEventListener.class);
 
     @EventListener
     public void handleWebSocketConnectListener(SessionConnectedEvent event) {
@@ -34,7 +34,7 @@ public class WebSocketChatEventListener {
     public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
         StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
 
-        int userId = (int) headerAccessor.getSessionAttributes().get("username");
+        int userId = (int) headerAccessor.getSessionAttributes().get("userId");
 
         GameChatMessage chatMessage = GameChatMessage.builder().
                 type(MessageType.DISCONNECT).
