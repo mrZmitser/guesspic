@@ -11,18 +11,20 @@ import spring_server.chat_model.GameChatMessage;
 
 @Controller
 public class WebSocketChatController {
+    @Autowired
+    GameChatController gameChatController;
 
-    @MessageMapping("/chat.send")
-    @SendTo("/topic/public")
+    @MessageMapping("/chat.send") //chat-example/app/chat.send
+    @SendTo("/topic/public") //chat-example/topic/public
     public GameChatMessage sendMessage(@Payload GameChatMessage chatMessage) {
-        GameChatController.getRoom(chatMessage.getChatRoomId()).addMessage(chatMessage);
+        gameChatController.getRoom(chatMessage.getChatRoomId()).addMessage(chatMessage);
         return chatMessage;
     }
 
     @MessageMapping("/chat.newUser")
     @SendTo("/topic/public")
     public GameChatMessage newUser(@Payload GameChatMessage chatMessage, SimpMessageHeaderAccessor headerAccessor) {
-        GameChatController.getRoom(chatMessage.getChatRoomId()).addMessage(chatMessage);
+        gameChatController.getRoom(chatMessage.getChatRoomId()).addMessage(chatMessage);
         headerAccessor.getSessionAttributes().put("username", chatMessage.getSenderId());
         return chatMessage;
     }

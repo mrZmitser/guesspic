@@ -3,24 +3,27 @@ package spring_server.chat_model;
 import lombok.Getter;
 import org.springframework.stereotype.Component;
 
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 public class GameChatController {
     @Getter
-    private static final Map<Integer, GameChatRoom> chats = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<Integer, GameChatRoom> gameRooms = new ConcurrentHashMap<>();
 
-    public static void add(GameChatRoom chatRoom) {
-        chats.put(chatRoom.getId(), chatRoom);
+    public void add(GameChatRoom chatRoom) {
+        gameRooms.put(chatRoom.getId(), chatRoom);
     }
 
-    public static void remove(int chatRoomId) {
-        chats.remove(chatRoomId);
+    public void remove(int chatRoomId) {
+        gameRooms.remove(chatRoomId);
     }
 
-    public static GameChatRoom getRoom(int id) {
-        return chats.get(id);
+    public GameChatRoom getRoom(int id) {
+        return gameRooms.get(id);
+    }
+
+    public void addToRoom(int roomId, User user) {
+        getRoom(roomId).addUser(user);
     }
 
 }
