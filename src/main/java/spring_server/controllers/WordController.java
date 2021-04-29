@@ -13,6 +13,5 @@ public class WordController {
     @GetMapping("/word")
     public Word word() {
         return WordDao.getRandWord().orElse(new Word("Error"));
-
     }
 }
