@@ -21,7 +21,6 @@ public class HibernateRequest {
             e.printStackTrace();
         }
 
-        HibernateUtil.shutdown();
         return words;
     }
 
@@ -35,7 +34,6 @@ public class HibernateRequest {
             e.printStackTrace();
         }
 
-        HibernateUtil.shutdown();
         return words;
     }
 }
