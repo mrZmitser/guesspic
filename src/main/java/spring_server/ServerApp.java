@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ServerApp {
 
     public static void main(String[] args) {
-        WordDao.migrate();
+        //WordDao.migrate();
         SpringApplication.run(ServerApp.class);
     }
 

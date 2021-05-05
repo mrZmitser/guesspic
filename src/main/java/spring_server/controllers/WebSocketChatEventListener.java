@@ -5,20 +5,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
-import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.messaging.SessionConnectedEvent;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
-import spring_server.chat_model.GameChatController;
-import spring_server.chat_model.GameChatMessage;
-import spring_server.chat_model.MessageType;
-
+import spring_server.chat_model.RoomsController;
 
 @Component
 public class WebSocketChatEventListener {
 
     @Autowired
-    GameChatController gameChatController;
+    RoomsController roomsController;
 
     @Autowired
     private SimpMessageSendingOperations messagingTemplate;
@@ -32,15 +28,6 @@ public class WebSocketChatEventListener {
 
     @EventListener
     public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
-        StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
-
-        int userId = (int) headerAccessor.getSessionAttributes().get("userId");
-
-        GameChatMessage chatMessage = GameChatMessage.builder().
-                type(MessageType.DISCONNECT).
-                senderId(userId).
-                build();
-
-        messagingTemplate.convertAndSend("/topic/public", chatMessage);
+        logger.info("Connection has lost!");
     }
 }
