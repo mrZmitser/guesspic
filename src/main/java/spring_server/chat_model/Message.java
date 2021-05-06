@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @AllArgsConstructor
 @Builder
-public class GameChatMessage {
+public class Message {
     @Getter
     @Setter
     private MessageType type;
@@ -22,9 +22,5 @@ public class GameChatMessage {
 
     @Getter
     @Setter
-    private String time;
-
-    @Getter
-    @Setter
-    private int chatRoomId;
+    private long chatRoomId;
 }
