@@ -1,6 +1,7 @@
 package spring_server.chat_model;
 
 import database.Word;
+import database.WordDao;
 import lombok.Getter;
 
 import java.util.*;
@@ -75,7 +76,6 @@ public class Room {
         painterId = paintersQueue.poll().getId();
         users.get(painterId).setPainter(true);
 
-        //currWord = WordDao.getRandWord();
-        currWord = Optional.of(new Word("rap"));
+        currWord = WordDao.getRandWord();
     }
 }
