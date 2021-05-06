@@ -9,17 +9,21 @@ import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.messaging.SessionConnectedEvent;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
-import spring_server.chat_model.ChatMessage;
+import spring_server.chat_model.GameChatController;
+import spring_server.chat_model.GameChatMessage;
 import spring_server.chat_model.MessageType;
 
 
 @Component
 public class WebSocketChatEventListener {
 
-    private static final Logger logger = LoggerFactory.getLogger(WebSocketChatEventListener.class);
+    @Autowired
+    GameChatController gameChatController;
 
     @Autowired
     private SimpMessageSendingOperations messagingTemplate;
+
+    private static final Logger logger = LoggerFactory.getLogger(WebSocketChatEventListener.class);
 
     @EventListener
     public void handleWebSocketConnectListener(SessionConnectedEvent event) {
@@ -30,9 +34,9 @@ public class WebSocketChatEventListener {
     public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
         StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
 
-        int userId = (int) headerAccessor.getSessionAttributes().get("username");
+        int userId = (int) headerAccessor.getSessionAttributes().get("userId");
 
-        ChatMessage chatMessage = ChatMessage.builder().
+        GameChatMessage chatMessage = GameChatMessage.builder().
                 type(MessageType.DISCONNECT).
                 senderId(userId).
                 build();

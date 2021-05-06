@@ -1,5 +1,7 @@
 package database;
 
+import org.flywaydb.core.Flyway;
+import org.jboss.jandex.Index;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
@@ -50,14 +52,26 @@ public class WordDao implements Dao<Word> {
         words.remove(word);
     }
 
-    public Optional<Word> getRandWord() {
+    public static Optional<Word> getRandWord() {
         Word word;
         try {
             word = HibernateRequest.getById().get(0);
-        } catch (SQLException e) {
+        } catch (SQLException | IndexOutOfBoundsException e) {
             e.printStackTrace();
             return Optional.empty();
         }
         return Optional.of(word);
+    }
+
+    final static String DB_URL = "jdbc:postgresql://localhost:5432/postgres";
+    final static String DB_USER_LOGIN = "postgres";
+    final static String DB_USER_PASSWORD = "password";
+
+    public static void migrate() {
+        var flyway = Flyway.configure().dataSource(DB_URL, DB_USER_LOGIN, DB_USER_PASSWORD)
+                .load();
+        flyway.clean();
+        var result = flyway.migrate();
+        System.out.println(result.migrationsExecuted);
     }
 }
