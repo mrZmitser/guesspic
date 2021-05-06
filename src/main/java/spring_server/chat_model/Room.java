@@ -58,10 +58,15 @@ public class Room {
     public void removeUser(int userId) {
         paintersQueue.remove(getUserById(userId));
         users.remove(userId);
+        if (userId == painterId) {
+            updateWordAndPainter();
+        }
     }
 
     // TO MAKE BETTER
     private void updateWordAndPainter() {
+        if (users.size() == 0) return;
+
         if (paintersQueue.isEmpty()) {
             paintersQueue.addAll(users.values());
         }
@@ -71,6 +76,6 @@ public class Room {
         users.get(painterId).setPainter(true);
 
         //currWord = WordDao.getRandWord();
-        currWord = Optional.of(new Word("Rap"));
+        currWord = Optional.of(new Word("rap"));
     }
 }
