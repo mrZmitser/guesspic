@@ -47,7 +47,7 @@ public class RoomRequestController {
     }
 
     @GetMapping("room/{roomId}/user/{painterId}/word")
-    public String getWord(@PathVariable("roomId") long painterId, @PathVariable("painterId") int roomId) {
+    public String getWord(@PathVariable("roomId") long roomId, @PathVariable("painterId") int painterId) {
         Room room = roomsController.getRoomById(roomId);
         if (room.getPainterId() == painterId) {
             if (room.getCurrWord().isPresent()) {
