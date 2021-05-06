@@ -49,7 +49,7 @@ public class Room {
         paintersQueue.add(user);
         this.users.put(user.getId(), user);
 
-        if (users.size() == 2) {
+        if (users.size() == 1) {
             painterId = user.getId();
             updateWordAndPainter();
         }
