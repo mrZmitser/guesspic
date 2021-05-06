@@ -1,8 +1,6 @@
 package database;
 
 import org.flywaydb.core.Flyway;
-import org.jboss.jandex.Index;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.sql.SQLException;
