@@ -61,15 +61,12 @@ public class WordDao implements Dao<Word> {
         return Optional.of(word);
     }
 
-    final static String DB_URL = "jdbc:postgresql://localhost:5432/postgres";
-    final static String DB_USER_LOGIN = "postgres";
-    final static String DB_USER_PASSWORD = "password";
-
     public static void migrate() {
-        var flyway = Flyway.configure().dataSource(System.getenv("JDBC_DATABASE_URL"),
+        var flyway = Flyway.configure().dataSource(
+                System.getenv("JDBC_DATABASE_URL"),
                 System.getenv("JDBC_DATABASE_USERNAME"),
-                System.getenv("JDBC_DATABASE_PASSWORD"))
-                .load();
+                System.getenv("JDBC_DATABASE_PASSWORD")
+        ).load();
         flyway.clean();
         var result = flyway.migrate();
         System.out.println(result.migrationsExecuted);
