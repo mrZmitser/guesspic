@@ -23,12 +23,23 @@ public class WebSocketChatController {
     public Message sendMessage(String jsonMessage) {
         Message chatMessage = gson.fromJson(jsonMessage, Message.class);
         Room room = roomsController.getRoomById(chatMessage.getChatRoomId());
+        int roomPainterId = room.getPainterId();
 
         if (chatMessage.getType() == MessageType.DISCONNECT) {
-            roomsController.getRoomById(chatMessage.getChatRoomId()).removeUser(chatMessage.getSenderId());
+            room.removeUser(chatMessage.getSenderId());
+            if (roomPainterId == chatMessage.getSenderId()) {
+                messagingTemplate.convertAndSend("/topic/public",
+                        Message.builder().
+                                type(MessageType.INIT_WORD_AND_PAINTER).
+                                content(String.valueOf(room.getPainterId())).
+                                senderId(chatMessage.getSenderId()).
+                                chatRoomId(room.getId()).
+                                build()
+                );
+            }
         }
 
-        if (room.addMessage(chatMessage)) {
+        if (chatMessage.getType() == MessageType.CHAT && room.addMessage(chatMessage)) {
             messagingTemplate.convertAndSend("/topic/public",
                     Message.builder().
                     type(MessageType.WIN).
