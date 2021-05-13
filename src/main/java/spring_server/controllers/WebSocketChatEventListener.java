@@ -14,7 +14,6 @@ import spring_server.chat_model.RoomsController;
 public class WebSocketChatEventListener {
     @Autowired
     RoomsController roomsController;
-
     @Autowired
     private SimpMessageSendingOperations messagingTemplate;
 
