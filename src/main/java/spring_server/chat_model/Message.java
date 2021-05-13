@@ -22,5 +22,5 @@ public class Message {
 
     @Getter
     @Setter
-    private long chatRoomId;
+    private int chatRoomId;
 }
