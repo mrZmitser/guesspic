@@ -78,7 +78,6 @@ public class Room {
         painterId = paintersQueue.poll().getId();
         users.get(painterId).setPainter(true);
 
-        currWord = Optional.of(new Word("Rap"));
-        //currWord = WordDao.getRandWord();
+        currWord = WordDao.getRandWord();
     }
 }
