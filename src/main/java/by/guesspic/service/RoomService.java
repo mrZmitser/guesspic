@@ -1,12 +1,14 @@
-package spring_server.chat_model;
+package by.guesspic.service;
 
+import by.guesspic.data.User;
 import lombok.Getter;
 import org.springframework.stereotype.Component;
+import by.guesspic.room.Room;
 
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
-public class RoomsController {
+public class RoomService {
 
     private final int MAX_USERS = 5;
     @Getter
@@ -26,7 +28,7 @@ public class RoomsController {
         return gameRooms.get(id);
     }
 
-    public int addToRandomRoom(User user) {
+    public int addToNearestFreeRoom(User user) {
         for (Room room : gameRooms.values()) {
             if (room.getUsers().size() < MAX_USERS) {
                 room.addUser(user);

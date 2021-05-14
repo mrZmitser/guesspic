@@ -1,4 +1,4 @@
-package database;
+package by.guesspic.data;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

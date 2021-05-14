@@ -1,7 +1,9 @@
-package spring_server.chat_model;
+package by.guesspic.room;
 
-import database.Word;
-import database.WordDao;
+import by.guesspic.data.Message;
+import by.guesspic.data.User;
+import by.guesspic.data.Word;
+import by.guesspic.dao.WordDao;
 import lombok.Getter;
 
 import java.util.*;

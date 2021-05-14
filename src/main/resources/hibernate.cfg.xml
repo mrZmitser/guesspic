@@ -7,7 +7,7 @@
 
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-        <mapping class="database.Word"/>
+        <mapping class="by.guesspic.data.Word"/>
 
     </session-factory>
 </hibernate-configuration>

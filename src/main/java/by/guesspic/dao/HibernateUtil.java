@@ -1,4 +1,4 @@
-package database;
+package by.guesspic.dao;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
