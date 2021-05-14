@@ -6,5 +6,6 @@ public enum MessageType {
     DISCONNECT,
     UPDATE_CANVAS,
     WIN,
-    INIT_WORD_AND_PAINTER
+    INIT_WORD_AND_PAINTER,
+    RAISE_PEN
 }
