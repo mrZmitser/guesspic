@@ -14,7 +14,7 @@ public class User {
 
     @Getter
     @Setter
-    private long roomId;
+    private int roomId;
 
     @Getter
     private transient int score = 0;

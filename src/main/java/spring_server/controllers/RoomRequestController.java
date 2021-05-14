@@ -13,6 +13,8 @@ import spring_server.chat_model.*;
 @RestController
 public class RoomRequestController {
     @Autowired
+    private RoomActivityController activityController;
+    @Autowired
     private SimpMessageSendingOperations messagingTemplate;
 
     @Autowired
@@ -20,13 +22,14 @@ public class RoomRequestController {
 
     private static final Gson gson = new GsonBuilder().create();
 
-
     @PostMapping("new_user/{name}")
     public User addUser(@PathVariable("name") String name) {
         User user = new User(name);
-        long roomId = roomsController.addToRandomRoom(user);
+        int roomId = roomsController.addToRandomRoom(user);
+        activityController.updateActivity(roomsController.getRoomById(roomId),
+                user.getId());
 
-        messagingTemplate.convertAndSend("/topic/public",  Message.builder().
+        messagingTemplate.convertAndSend("/topic/public" + "/" + roomId,  Message.builder().
                 type(MessageType.CONNECT).
                 content(gson.toJson(user)).
                 senderId(0).
@@ -37,17 +40,17 @@ public class RoomRequestController {
     }
 
     @GetMapping("update_users/{roomId}")
-    public User[] updateUsers(@PathVariable("roomId") long roomId) {
+    public User[] updateUsers(@PathVariable("roomId") int roomId) {
         return roomsController.getRoomById(roomId).getUsers().values().toArray(new User[0]);
     }
 
     @GetMapping("painter_id/{roomId}")
-    public int painterId(@PathVariable("roomId") long roomId) {
+    public int painterId(@PathVariable("roomId") int roomId) {
         return roomsController.getRoomById(roomId).getPainterId();
     }
 
     @GetMapping("room/{roomId}/user/{painterId}/word")
-    public String getWord(@PathVariable("roomId") long roomId, @PathVariable("painterId") int painterId) {
+    public String getWord(@PathVariable("roomId") int roomId, @PathVariable("painterId") int painterId) {
         Room room = roomsController.getRoomById(roomId);
         if (room.getPainterId() == painterId) {
             if (room.getCurrWord().isPresent()) {

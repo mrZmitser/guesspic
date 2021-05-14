@@ -17,13 +17,13 @@ public class Room {
     @Getter
     private final String name;
     @Getter
-    private final Long id;
+    private final int id;
     @Getter
     private int painterId = 1;
     @Getter
     private final int bonus = 5;
 
-    private static long idCounter = 1;
+    private static int idCounter = 1;
 
     @Getter
     private Optional<Word> currWord = Optional.empty();
@@ -33,7 +33,7 @@ public class Room {
         this.id = idCounter++;
     }
 
-    public boolean addMessage(Message message) {
+    public boolean guessWord(Message message) {
         if (currWord.isPresent() && message.getContent().equalsIgnoreCase(currWord.get().getWord())) {
             users.get(message.getSenderId()).addScore(bonus);
             updateWordAndPainter();
@@ -45,6 +45,7 @@ public class Room {
     public User getUserById(int id) {
         return users.get(id);
     }
+
 
     public void addUser(User user) {
         paintersQueue.add(user);
@@ -64,7 +65,6 @@ public class Room {
         }
     }
 
-    // TO MAKE BETTER
     private void updateWordAndPainter() {
         if (users.size() == 0) return;
 
@@ -72,10 +72,13 @@ public class Room {
             paintersQueue.addAll(users.values());
         }
 
-        users.get(painterId).setPainter(false);
+        if (users.contains(painterId)) {
+            users.get(painterId).setPainter(false);
+        }
         painterId = paintersQueue.poll().getId();
         users.get(painterId).setPainter(true);
 
-        currWord = WordDao.getRandWord();
+        currWord = Optional.of(new Word("Rap"));
+        //currWord = WordDao.getRandWord();
     }
 }
