@@ -16,7 +16,7 @@ public class HibernateRequest {
         List<Word> words = new ArrayList<>();
 
         try {
-            Query<Word> query = session.createQuery("from database.Word group by id", Word.class);
+            Query<Word> query = session.createQuery("from by.guesspic.dao.Word group by id", Word.class);
             words = query.list();
         } catch (Exception e) {
             e.printStackTrace();
@@ -29,7 +29,7 @@ public class HibernateRequest {
         List<Word> words = new ArrayList<>();
 
         try {
-            Query<Word> query = session.createQuery("from database.Word ORDER BY RAND()", Word.class).setMaxResults(1);
+            Query<Word> query = session.createQuery("from by.guesspic.dao.Word ORDER BY RAND()", Word.class).setMaxResults(1);
             words = query.list();
         } catch (Exception e) {
             e.printStackTrace();
