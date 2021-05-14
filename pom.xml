@@ -109,13 +109,6 @@
                         <id>copy-dependencies</id>
                         <phase>package</phase>
                         <goals>
-                            <goal>copy-dependencies</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>copy-dependencies</id>
-                        <phase>package</phase>
-                        <goals>
                             <goal>copy</goal>
                         </goals>
                         <configuration>
