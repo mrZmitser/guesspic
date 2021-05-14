@@ -1,4 +1,4 @@
-package spring_server.controllers;
+package by.guesspic.controllers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,12 +8,12 @@ import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.messaging.SessionConnectedEvent;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
-import spring_server.chat_model.RoomsController;
+import by.guesspic.service.RoomService;
 
 @Component
 public class WebSocketChatEventListener {
     @Autowired
-    RoomsController roomsController;
+    RoomService roomsController;
     @Autowired
     private SimpMessageSendingOperations messagingTemplate;
 
