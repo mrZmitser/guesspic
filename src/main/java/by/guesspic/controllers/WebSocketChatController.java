@@ -1,26 +1,26 @@
-package spring_server.controllers;
+package by.guesspic.controllers;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import by.guesspic.data.Message;
+import by.guesspic.data.MessageType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Controller;
-import spring_server.chat_model.*;
-
-import java.util.Collections;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
+import by.guesspic.room.Room;
+import by.guesspic.service.RoomActivityService;
+import by.guesspic.service.RoomService;
 
 @Controller
 public class WebSocketChatController {
     @Autowired
-    private RoomActivityController activityController;
+    private RoomActivityService activityController;
     @Autowired
     private SimpMessageSendingOperations messagingTemplate;
     @Autowired
-    private RoomsController roomsController;
+    private RoomService roomsController;
 
     private static final Gson gson = new GsonBuilder().create();
 

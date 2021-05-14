@@ -1,12 +1,14 @@
-package spring_server.chat_model;
+package by.guesspic.service;
 
 import org.springframework.stereotype.Component;
+import by.guesspic.room.Room;
+import by.guesspic.room.RoomActivity;
 
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
-public class RoomActivityController {
+public class RoomActivityService {
     private final Long DELAY = 60000L;
 
     private final ConcurrentHashMap<Integer, RoomActivity> activities = new ConcurrentHashMap<>();

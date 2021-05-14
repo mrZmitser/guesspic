@@ -1,5 +1,6 @@
-package database;
+package by.guesspic.dao;
 
+import by.guesspic.data.Word;
 import org.flywaydb.core.Flyway;
 import org.springframework.stereotype.Repository;
 

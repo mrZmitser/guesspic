@@ -1,14 +1,13 @@
-package spring_server;
+package by.guesspic;
 
-import database.WordDao;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication(scanBasePackages = {"database", "spring_server"})
+@SpringBootApplication
 public class ServerApp {
 
     public static void main(String[] args) {
-        WordDao.migrate();
+        //WordDao.migrate();
         SpringApplication.run(ServerApp.class);
     }
 

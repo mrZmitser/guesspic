@@ -1,4 +1,4 @@
-package spring_server.chat_model;
+package by.guesspic.data;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

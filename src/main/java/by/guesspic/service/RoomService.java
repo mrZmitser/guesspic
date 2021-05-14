@@ -1,21 +1,21 @@
-package spring_server.chat_model;
+package by.guesspic.service;
 
+import by.guesspic.data.User;
 import lombok.Getter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Component;
+import by.guesspic.room.Room;
 
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
-public class GameChatController {
+public class RoomService {
 
     private final int MAX_USERS = 5;
     @Getter
-    private final ConcurrentHashMap<Long, GameChatRoom> gameRooms = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<Integer, Room> gameRooms = new ConcurrentHashMap<>();
 
-    private long createRoom() {
-        GameChatRoom chatRoom = new GameChatRoom("Room #" + gameRooms.size());
+    private int createRoom() {
+        Room chatRoom = new Room("Room #" + gameRooms.size());
         gameRooms.put(chatRoom.getId(), chatRoom);
         return chatRoom.getId();
     }
@@ -24,12 +24,12 @@ public class GameChatController {
         gameRooms.get(user.getRoomId()).removeUser(user.getId());
     }
 
-    public GameChatRoom getRoomById(long id) {
+    public Room getRoomById(int id) {
         return gameRooms.get(id);
     }
 
-    public long addToRandomRoom(User user) {
-        for (GameChatRoom room : gameRooms.values()) {
+    public int addToNearestFreeRoom(User user) {
+        for (Room room : gameRooms.values()) {
             if (room.getUsers().size() < MAX_USERS) {
                 room.addUser(user);
                 user.setRoomId(room.getId());
@@ -37,11 +37,11 @@ public class GameChatController {
             }
         }
 
-        long roomId = createRoom();
+        int roomId = createRoom();
         gameRooms.get(roomId).addUser(user);
         user.setRoomId(roomId);
+        user.setPainter(true);
 
         return roomId;
     }
-
 }

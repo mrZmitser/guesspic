@@ -1,5 +1,6 @@
-package database;
+package by.guesspic.dao;
 
+import by.guesspic.data.Word;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
