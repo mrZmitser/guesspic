@@ -54,7 +54,7 @@ public class RoomRequestController {
         return roomsController.getRoomById(roomId).getPainterId();
     }
 
-    @GetMapping("by/guesspic/room/{roomId}/user/{painterId}/word")
+    @GetMapping("room/{roomId}/user/{painterId}/word")
     public String getWord(@PathVariable("roomId") int roomId, @PathVariable("painterId") int painterId) {
         Room room = roomsController.getRoomById(roomId);
         if (room.getPainterId() == painterId) {
