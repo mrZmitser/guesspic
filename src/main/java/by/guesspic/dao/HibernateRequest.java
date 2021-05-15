@@ -27,7 +27,6 @@ public class HibernateRequest {
 
     public static List<Word> getById() throws SQLException {
         List<Word> words = new ArrayList<>();
-
         try {
             Query<Word> query = session.createQuery("from by.guesspic.data.Word ORDER BY RAND()", Word.class).setMaxResults(1);
             words = query.list();
